@@ -12,6 +12,7 @@
 		EFA03E0D2147FA37003D1D4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFA03E0B2147FA37003D1D4C /* Main.storyboard */; };
 		EFA03E0F2147FA39003D1D4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA03E0E2147FA39003D1D4C /* Assets.xcassets */; };
 		EFA03E122147FA39003D1D4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFA03E102147FA39003D1D4C /* LaunchScreen.storyboard */; };
+		EFA03E1A2149677A003D1D4C /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA03E192149677A003D1D4C /* UIColor+theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		EFA03E0E2147FA39003D1D4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EFA03E112147FA39003D1D4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EFA03E132147FA39003D1D4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFA03E192149677A003D1D4C /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				EFA03E0E2147FA39003D1D4C /* Assets.xcassets */,
 				EFA03E102147FA39003D1D4C /* LaunchScreen.storyboard */,
 				EFA03E132147FA39003D1D4C /* Info.plist */,
+				EFA03E192149677A003D1D4C /* UIColor+theme.swift */,
 			);
 			path = CoreDataProject;
 			sourceTree = "<group>";
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFA03E1A2149677A003D1D4C /* UIColor+theme.swift in Sources */,
 				EFA03E0A2147FA37003D1D4C /* ViewController.swift in Sources */,
 				EFA03E082147FA37003D1D4C /* AppDelegate.swift in Sources */,
 			);
