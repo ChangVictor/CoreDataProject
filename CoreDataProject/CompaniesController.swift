@@ -20,14 +20,7 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
 	
 	fileprivate func fetchCompanies() {
 		// Attemp to fetch from CoreData
-//		let persistentContainer = NSPersistentContainer(name: "DataModel")
 //
-//		persistentContainer.loadPersistentStores { (storeDescription, error) in
-//			if let error = error {
-//				fatalError("Loading of store failed: \(error)")
-//			}
-//		}
-//		let context = persistentContainer.viewContext
 		let context = CoreDataManager.shared.persistentContainer.viewContext
 		
 		let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
@@ -75,6 +68,35 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
 		
 		createCompanyController.delegate = self
 		present(navController, animated: true, completion: nil)
+	}
+	
+	override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+		let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
+			let company = self.companies[indexPath.row]
+			print("Attempting to delete company: ", company.name ?? "")
+			
+			// remove the company from tableView
+			self.companies.remove(at: indexPath.row)
+			self.tableView.deleteRows(at: [indexPath], with: .automatic)
+			
+			// delete the company from CoreData
+			let context = CoreDataManager.shared.persistentContainer.viewContext
+			
+			context.delete(company)
+			
+			do {
+				try context.save()
+			} catch let saveError {
+				print("Failed to delete company: ", saveError)
+			}
+			
+		}
+		
+		let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (_, indexPath) in
+			print("Editing company...")
+		}
+		
+		return [deleteAction, editAction]
 	}
 	
 	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
