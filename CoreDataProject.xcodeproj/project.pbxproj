@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EF6D4716214AE8BF00425BAC /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF6D4714214AE8BF00425BAC /* DataModel.xcdatamodeld */; };
+		EF6D4718214AF8A600425BAC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D4717214AF8A600425BAC /* CoreDataManager.swift */; };
 		EFA03E082147FA37003D1D4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA03E072147FA37003D1D4C /* AppDelegate.swift */; };
 		EFA03E0A2147FA37003D1D4C /* CompaniesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA03E092147FA37003D1D4C /* CompaniesController.swift */; };
 		EFA03E0D2147FA37003D1D4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFA03E0B2147FA37003D1D4C /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		EF6D4715214AE8BF00425BAC /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		EF6D4717214AF8A600425BAC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		EFA03E042147FA37003D1D4C /* CoreDataProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA03E072147FA37003D1D4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFA03E092147FA37003D1D4C /* CompaniesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesController.swift; sourceTree = "<group>"; };
@@ -62,7 +64,6 @@
 		EFA03E062147FA37003D1D4C /* CoreDataProject */ = {
 			isa = PBXGroup;
 			children = (
-				EFA03E072147FA37003D1D4C /* AppDelegate.swift */,
 				EFA03E092147FA37003D1D4C /* CompaniesController.swift */,
 				EFA03E1D2149C680003D1D4C /* CreateCompanyController.swift */,
 				EFA03E0B2147FA37003D1D4C /* Main.storyboard */,
@@ -71,7 +72,9 @@
 				EFA03E132147FA39003D1D4C /* Info.plist */,
 				EFA03E192149677A003D1D4C /* UIColor+theme.swift */,
 				EFA03E1B2149C305003D1D4C /* Company.swift */,
+				EFA03E072147FA37003D1D4C /* AppDelegate.swift */,
 				EF6D4714214AE8BF00425BAC /* DataModel.xcdatamodeld */,
+				EF6D4717214AF8A600425BAC /* CoreDataManager.swift */,
 			);
 			path = CoreDataProject;
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 				EFA03E1E2149C680003D1D4C /* CreateCompanyController.swift in Sources */,
 				EF6D4716214AE8BF00425BAC /* DataModel.xcdatamodeld in Sources */,
 				EFA03E082147FA37003D1D4C /* AppDelegate.swift in Sources */,
+				EF6D4718214AF8A600425BAC /* CoreDataManager.swift in Sources */,
 				EFA03E1C2149C305003D1D4C /* Company.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
