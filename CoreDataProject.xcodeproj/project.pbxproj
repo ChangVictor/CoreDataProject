@@ -62,13 +62,13 @@
 			children = (
 				EFA03E072147FA37003D1D4C /* AppDelegate.swift */,
 				EFA03E092147FA37003D1D4C /* CompaniesController.swift */,
+				EFA03E1D2149C680003D1D4C /* CreateCompanyController.swift */,
 				EFA03E0B2147FA37003D1D4C /* Main.storyboard */,
 				EFA03E0E2147FA39003D1D4C /* Assets.xcassets */,
 				EFA03E102147FA39003D1D4C /* LaunchScreen.storyboard */,
 				EFA03E132147FA39003D1D4C /* Info.plist */,
 				EFA03E192149677A003D1D4C /* UIColor+theme.swift */,
 				EFA03E1B2149C305003D1D4C /* Company.swift */,
-				EFA03E1D2149C680003D1D4C /* CreateCompanyController.swift */,
 			);
 			path = CoreDataProject;
 			sourceTree = "<group>";
