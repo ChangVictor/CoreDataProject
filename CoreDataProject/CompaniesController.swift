@@ -45,7 +45,38 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
 		navigationItem.title = "Companies"
 		
 		navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddCompany))
+		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset))
 		
+	}
+	
+	@objc fileprivate func handleReset() {
+		print("Attempting to delete all CoreData objects...")
+		let context = CoreDataManager.shared.persistentContainer.viewContext
+		
+//		companies.forEach { (company) in
+//			context.delete(company)
+//
+//		}
+		
+		let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: Company.fetchRequest())
+		
+		do {
+			try context.execute(batchDeleteRequest)
+			// upon deletion from core data
+			var indexPathToRemove = [IndexPath]()
+			
+			for (index, _) in companies.enumerated() {
+				let indexPath = IndexPath(row: index, section: 0)
+				indexPathToRemove.append(indexPath)
+			}
+			
+			companies.removeAll()
+			tableView.deleteRows(at: indexPathToRemove, with: .left)
+		
+
+		} catch let deleteError {
+			print("Failed to delete objects from CoreData: ", deleteError)
+		}
 	}
 	
 	@objc func handleAddCompany() {
@@ -55,6 +86,19 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
 		
 		createCompanyController.delegate = self
 		present(navController, animated: true, completion: nil)
+	}
+	
+	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+		let label = UILabel()
+		label.text = "No companies available..."
+		label.textColor = .white
+		label.textAlignment = .center
+		label.font = UIFont.boldSystemFont(ofSize: 16)
+		return label
+	}
+	
+	override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+		return companies.count == 0 ? 150 : 0
 	}
 	
 	override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
