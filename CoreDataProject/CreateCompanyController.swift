@@ -13,10 +13,16 @@ import CoreData
 
 protocol CreateCompanyControllerDelegate {
 	func didAddCompany(company: Company)
+	func didEditCompany(company: Company)
 }
 
 class CreateCompanyController: UIViewController {
 	
+	var company: Company? {
+		didSet {
+			nameTextField.text = company?.name
+		}
+	}
 	var delegate: CreateCompanyControllerDelegate?
 //	var companiesController: CompaniesController?
 	
@@ -34,10 +40,14 @@ class CreateCompanyController: UIViewController {
 		return textField
 	}()
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		navigationItem.title = company == nil ? "Create Company" : "Edit Company"
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		navigationItem.title = "Create Company"
 		
 		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
@@ -72,7 +82,32 @@ class CreateCompanyController: UIViewController {
 	}
 	
 	@objc func handleSave() {
+		if company == nil {
+			createCompany()
+		} else {
+			saveCompanyChanges()
+		}
+	}
+	
+	fileprivate func saveCompanyChanges() {
 		
+		let context = CoreDataManager.shared.persistentContainer.viewContext
+		
+		company?.name = nameTextField.text
+		
+		do {
+			
+			try context.save()
+			dismiss(animated: true) {
+				self.delegate?.didEditCompany(company: self.company!)
+			}
+
+		} catch let saveError {
+			print("Failed to save company changes: ", saveError)
+		}
+	}
+	
+	fileprivate func createCompany() {
 		// Initialization of CoreData stack
 		
 		let context = CoreDataManager.shared.persistentContainer.viewContext
@@ -91,7 +126,6 @@ class CreateCompanyController: UIViewController {
 		} catch let saveError {
 			print("Failed to save company: ", saveError)
 		}
-		
 	}
 	
 	@objc func handleCancel() {

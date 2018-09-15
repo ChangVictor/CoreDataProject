@@ -10,33 +10,20 @@ import UIKit
 import CoreData
 
 class CompaniesController: UITableViewController, CreateCompanyControllerDelegate {
+	
+	func didEditCompany(company: Company) {
+		// update tableView
+		guard let row = companies.index(of: company) else { return }
+		let reloadIndexPath = IndexPath(row: row, section: 0)
+		tableView.reloadRows(at: [reloadIndexPath], with: .middle)
+	}
+	
 	func didAddCompany(company: Company) {
 		// in order to add a company, we have to modify the array
 		companies.append(company)
 		// and insert a new [indesPath] into the tableView
 		let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
 		tableView.insertRows(at: [newIndexPath], with: .automatic)
-	}
-	
-	fileprivate func fetchCompanies() {
-		// Attemp to fetch from CoreData
-//
-		let context = CoreDataManager.shared.persistentContainer.viewContext
-		
-		let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
-		
-		do {
-			let companies = try context.fetch(fetchRequest)
-			companies.forEach { (company) in
-				print(company.name ?? "")
-			}
-			
-			self.companies = companies
-			self.tableView.reloadData()
-
-		} catch let fetchError {
-			print("Failed to fetch companies: ", fetchError)
-		}
 	}
 	
 	let cellId = "cellId"
@@ -89,15 +76,47 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
 			} catch let saveError {
 				print("Failed to delete company: ", saveError)
 			}
-			
+
 		}
 		
-		let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (_, indexPath) in
-			print("Editing company...")
-		}
+		let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: editHandlerFunction)
+		
 		
 		return [deleteAction, editAction]
 	}
+	
+	
+	private func editHandlerFunction(action: UITableViewRowAction, indexPath: IndexPath) {
+		print("Editing company in separate function")
+		
+		let editCompanyController = CreateCompanyController()
+		editCompanyController.delegate = self
+		editCompanyController.company = companies[indexPath.row]
+		let navController = CustomNavigationController(rootViewController: editCompanyController)
+		present(navController, animated: true, completion: nil )
+	}
+	
+	fileprivate func fetchCompanies() {
+		// Attemp to fetch from CoreData
+		//
+		let context = CoreDataManager.shared.persistentContainer.viewContext
+		
+		let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
+		
+		do {
+			let companies = try context.fetch(fetchRequest)
+			companies.forEach { (company) in
+				print(company.name ?? "")
+			}
+			
+			self.companies = companies
+			self.tableView.reloadData()
+			
+		} catch let fetchError {
+			print("Failed to fetch companies: ", fetchError)
+		}
+	}
+
 	
 	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		let view = UIView()
@@ -115,6 +134,7 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
 		cell.backgroundColor = .tealColor
 		
 		let company = companies[indexPath.row]
+		
 		cell.textLabel?.text = company.name
 		cell.textLabel?.textColor = .white
 		cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
