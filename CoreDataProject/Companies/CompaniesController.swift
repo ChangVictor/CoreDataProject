@@ -29,7 +29,7 @@ class CompaniesController: UITableViewController {
 		
 		navigationItem.title = "Companies"
 		
-		navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddCompany))
+		setupPlusButtonInNavBar(selector: #selector(handleAddCompany))
 		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset))
 		
 	}

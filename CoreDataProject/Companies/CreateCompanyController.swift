@@ -107,7 +107,7 @@ class CreateCompanyController: UIViewController, UINavigationControllerDelegate,
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
+		setupCancelButton()
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
 		
 		view.backgroundColor = UIColor.darkBlue
@@ -211,9 +211,5 @@ class CreateCompanyController: UIViewController, UINavigationControllerDelegate,
 		} catch let saveError {
 			print("Failed to save company: ", saveError)
 		}
-	}
-	
-	@objc func handleCancel() {
-		dismiss(animated: true, completion: nil)
 	}
 }
