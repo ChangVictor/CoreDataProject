@@ -17,6 +17,7 @@
 		EFA03E1A2149677A003D1D4C /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA03E192149677A003D1D4C /* UIColor+theme.swift */; };
 		EFA03E1C2149C305003D1D4C /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA03E1B2149C305003D1D4C /* Company.swift */; };
 		EFA03E1E2149C680003D1D4C /* CreateCompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA03E1D2149C680003D1D4C /* CreateCompanyController.swift */; };
+		EFA8A5B9214EB75100D3597D /* CompanyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A5B8214EB75100D3597D /* CompanyCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		EFA03E192149677A003D1D4C /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		EFA03E1B2149C305003D1D4C /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		EFA03E1D2149C680003D1D4C /* CreateCompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyController.swift; sourceTree = "<group>"; };
+		EFA8A5B8214EB75100D3597D /* CompanyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +66,7 @@
 		EFA03E062147FA37003D1D4C /* CoreDataProject */ = {
 			isa = PBXGroup;
 			children = (
-				EFA03E092147FA37003D1D4C /* CompaniesController.swift */,
+				EFA8A5BA214EB98A00D3597D /* Companies */,
 				EFA03E1D2149C680003D1D4C /* CreateCompanyController.swift */,
 				EFA03E0B2147FA37003D1D4C /* Main.storyboard */,
 				EFA03E0E2147FA39003D1D4C /* Assets.xcassets */,
@@ -77,6 +79,15 @@
 				EF6D4717214AF8A600425BAC /* CoreDataManager.swift */,
 			);
 			path = CoreDataProject;
+			sourceTree = "<group>";
+		};
+		EFA8A5BA214EB98A00D3597D /* Companies */ = {
+			isa = PBXGroup;
+			children = (
+				EFA03E092147FA37003D1D4C /* CompaniesController.swift */,
+				EFA8A5B8214EB75100D3597D /* CompanyCell.swift */,
+			);
+			path = Companies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +164,7 @@
 				EFA03E1A2149677A003D1D4C /* UIColor+theme.swift in Sources */,
 				EFA03E0A2147FA37003D1D4C /* CompaniesController.swift in Sources */,
 				EFA03E1E2149C680003D1D4C /* CreateCompanyController.swift in Sources */,
+				EFA8A5B9214EB75100D3597D /* CompanyCell.swift in Sources */,
 				EF6D4716214AE8BF00425BAC /* DataModel.xcdatamodeld in Sources */,
 				EFA03E082147FA37003D1D4C /* AppDelegate.swift in Sources */,
 				EF6D4718214AF8A600425BAC /* CoreDataManager.swift in Sources */,
