@@ -57,6 +57,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF326B4B21513A200009905B /* Emplyee */ = {
+			isa = PBXGroup;
+			children = (
+				EFA8A5BF214F186700D3597D /* EmployeesController.swift */,
+				EFA8A5C4214F1B5700D3597D /* CreateEmployeeController.swift */,
+			);
+			path = Emplyee;
+			sourceTree = "<group>";
+		};
 		EFA03DFB2147FA36003D1D4C = {
 			isa = PBXGroup;
 			children = (
@@ -76,9 +85,10 @@
 		EFA03E062147FA37003D1D4C /* CoreDataProject */ = {
 			isa = PBXGroup;
 			children = (
-				EFA8A5C1214F19DC00D3597D /* Helpers */,
+				EF326B4B21513A200009905B /* Emplyee */,
 				EFA8A5BA214EB98A00D3597D /* Companies */,
 				EFA03E0B2147FA37003D1D4C /* Main.storyboard */,
+				EFA8A5C1214F19DC00D3597D /* Helpers */,
 				EFA03E0E2147FA39003D1D4C /* Assets.xcassets */,
 				EFA03E102147FA39003D1D4C /* LaunchScreen.storyboard */,
 				EFA03E132147FA39003D1D4C /* Info.plist */,
@@ -87,8 +97,6 @@
 				EFA03E072147FA37003D1D4C /* AppDelegate.swift */,
 				EF6D4714214AE8BF00425BAC /* DataModel.xcdatamodeld */,
 				EF6D4717214AF8A600425BAC /* CoreDataManager.swift */,
-				EFA8A5BF214F186700D3597D /* EmployeesController.swift */,
-				EFA8A5C4214F1B5700D3597D /* CreateEmployeeController.swift */,
 			);
 			path = CoreDataProject;
 			sourceTree = "<group>";
