@@ -47,6 +47,7 @@ class CreateEmployeeController: UIViewController {
 	
 	@objc fileprivate func handleSave() {
 		print("Saving employee")
+		
 		guard let employeeName = nameTextField.text else { return }
 		let tuple = CoreDataManager.shared.createEmployee(employeeName: employeeName)
 		
