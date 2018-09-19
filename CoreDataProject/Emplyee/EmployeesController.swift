@@ -26,11 +26,10 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
 		
 		tableView.backgroundColor = UIColor.darkBlue
 		
-		setupPlusButtonInNavBar(selector: #selector(handleAdd))
-		
 		tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
 		
 		fetchEmployees()
+		setupPlusButtonInNavBar(selector: #selector(handleAdd))
 
 	}
 	
@@ -40,23 +39,25 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
 		let createEmployeeController = CreateEmployeeController()
 		let navController = UINavigationController(rootViewController: createEmployeeController)
 		createEmployeeController.delegate = self
-		
+		createEmployeeController.company = company
 		present(navController, animated: true, completion: nil)
 	}
 	
 	private func fetchEmployees() {
-		print("Trying to fecth employees")
-		let context = CoreDataManager.shared.persistentContainer.viewContext
-		let request = NSFetchRequest<Employee>(entityName: "Employee")
-		
-		do {
-			let employees = try context.fetch(request)
-			
-			self.employees = employees
+		guard let companyEmployeee = company?.employees?.allObjects as? [Employee] else { return }
+		self.employees = companyEmployeee
+//		print("Trying to fecth employees")
+//		let context = CoreDataManager.shared.persistentContainer.viewContext
+//		let request = NSFetchRequest<Employee>(entityName: "Employee")
+//
+//		do {
+//			let employees = try context.fetch(request)
+//
+//			self.employees = employees
 //			employees.forEach {print("Employee name: ", $0.name ?? "")}
-		} catch let error {
-			print("Failed to fetch employees", error)
-		}
+//		} catch let error {
+//			print("Failed to fetch employees", error)
+//		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +75,7 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
 		cell.textLabel?.text = employee.name
 		
 		if let taxId = employee.employeeInformation?.taxId {
-			cell.textLabel?.text = "\(employee.name ?? "")    \(taxId)"
+			cell.textLabel?.text = "\(employee.name ?? "")   \(taxId)"
 		}
 		
 		cell.backgroundColor = UIColor.tealColor
