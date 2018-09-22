@@ -9,6 +9,16 @@
 import UIKit
 import CoreData
 
+class IndentedLabel: UILabel {
+	
+	override func drawText(in rect: CGRect) {
+		let inset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+		let customRect = UIEdgeInsetsInsetRect(rect, inset)
+		super.drawText(in: customRect)
+	}
+	
+}
+
 class EmployeesController: UITableViewController, CreateEmployeeControllerDelegate {
 	
 	func didAddEmployee(employee: Employee) {
@@ -19,7 +29,12 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
 	
 	var company: Company?
 	var employees = [Employee]()
+	var shortNameEmployees = [Employee]()
+	var longNameEmployees = [Employee]()
+	var reallyLongNameEmployees = [Employee]()
 	let cellId = "cellId"
+	
+	var allEmployees = [[Employee]]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -45,19 +60,36 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
 	
 	private func fetchEmployees() {
 		guard let companyEmployeee = company?.employees?.allObjects as? [Employee] else { return }
-		self.employees = companyEmployeee
-//		print("Trying to fecth employees")
-//		let context = CoreDataManager.shared.persistentContainer.viewContext
-//		let request = NSFetchRequest<Employee>(entityName: "Employee")
-//
-//		do {
-//			let employees = try context.fetch(request)
-//
-//			self.employees = employees
-//			employees.forEach {print("Employee name: ", $0.name ?? "")}
-//		} catch let error {
-//			print("Failed to fetch employees", error)
-//		}
+//		self.employees = companyEmployeee
+		shortNameEmployees = companyEmployeee.filter({ (employee) -> Bool in
+			
+			if let count = employee.name?.count {
+				return count < 6
+			}
+			return false
+		})
+		
+		longNameEmployees = companyEmployeee.filter({ (employee) -> Bool in
+			if let count = employee.name?.count {
+				return count > 6 && count < 9
+			}
+			return false
+		})
+		
+		reallyLongNameEmployees = companyEmployeee.filter({ (employee) -> Bool in
+			if let count = employee.name?.count {
+				return count > 9
+			}
+			 return false
+		})
+		
+		allEmployees = [
+			shortNameEmployees,
+			longNameEmployees,
+			reallyLongNameEmployees
+		]
+		print(shortNameEmployees.count, longNameEmployees.count, reallyLongNameEmployees.count)
+
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -65,13 +97,45 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
 		navigationItem.title = company?.name
 	}
 	
+	override func numberOfSections(in tableView: UITableView) -> Int {
+		return allEmployees.count
+	}
+	
+	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		let label = IndentedLabel()
+		if section == 0 {
+			label.text = "Short names"
+		} else if section == 1{
+			label.text = "Long names"
+		} else {
+			label.text = "Really long names"
+		}
+		label.backgroundColor = UIColor.lightBlue
+		label.textColor = UIColor.darkBlue
+		label.font = UIFont.boldSystemFont(ofSize: 16)
+		return label
+	}
+	
+	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return 50
+	}
+	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return employees.count
+		
+		return allEmployees[section].count
+//		if section == 0 {
+//			return shortNameEmployees.count
+//		}
+//		return longNameEmployees.count
+		
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-		let employee = employees[indexPath.row]
+	
+		// ternary operator
+//		let employee = employees[indexPath.row]
+		let employee = allEmployees[indexPath.section][indexPath.row ]
 		cell.textLabel?.text = employee.name
 		
 //		if let taxId = employee.employeeInformation?.taxId {
