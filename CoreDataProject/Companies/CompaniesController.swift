@@ -30,8 +30,15 @@ class CompaniesController: UITableViewController {
 		navigationItem.title = "Companies"
 		
 		setupPlusButtonInNavBar(selector: #selector(handleAddCompany))
-		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset))
+		navigationItem.leftBarButtonItems = [
+			UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset)),
+			UIBarButtonItem(title: "Do Work", style: .plain, target: self, action: #selector(doWork))
+			]
 		
+	}
+	
+	@objc fileprivate func doWork() {
+		print("Trying to do work")
 	}
 	
 	@objc fileprivate func handleReset() {
