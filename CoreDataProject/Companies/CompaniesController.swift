@@ -32,8 +32,63 @@ class CompaniesController: UITableViewController {
 		setupPlusButtonInNavBar(selector: #selector(handleAddCompany))
 		navigationItem.leftBarButtonItems = [
 			UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset)),
-			UIBarButtonItem(title: "Do Update", style: .plain, target: self, action: #selector(doUpdate))
+			UIBarButtonItem(title: "Nested Update", style: .plain, target: self, action: #selector(doNestedUpdates))
 			]
+		
+	}
+	
+	@objc fileprivate func doNestedUpdates() {
+		print("Trying to perform Nested Updates")
+		
+		DispatchQueue.global(qos: .background).async {
+			
+			let privateContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+			
+			privateContext.parent = CoreDataManager.shared.persistentContainer.viewContext
+			
+			// execute updates on private context
+			let request: NSFetchRequest<Company> = Company.fetchRequest()
+			request.fetchLimit = 1
+			
+			do {
+				 let companies = try privateContext.fetch(request)
+				
+				companies.forEach({ (company) in
+					print(company.name ?? "")
+					company.name = "D: \(company.name ?? "")"
+				})
+				
+				do {
+					try privateContext.save()
+					
+					DispatchQueue.main.async {
+						do {
+							let context = CoreDataManager.shared.persistentContainer.viewContext
+							
+							if context.hasChanges {
+								
+								try context.save()
+							}
+							self.tableView.reloadData()
+
+						} catch let finalSaveError {
+							print("Failed to save main context: ", finalSaveError)
+						}
+						
+					}
+					
+				} catch let saveError {
+					print("Failed to save private context: ", saveError)
+				}
+				
+				
+			} catch let fetchError {
+				print("Faild to fetch on private context: ", fetchError )
+			}
+			
+			
+			
+		}
 		
 	}
 	
@@ -71,8 +126,7 @@ class CompaniesController: UITableViewController {
 				print("Failed to fetch companies on background: ", error)
 			}
 			
-			
-			
+
 		}
 		
 	}
