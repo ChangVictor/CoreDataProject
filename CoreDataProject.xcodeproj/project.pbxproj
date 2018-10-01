@@ -24,6 +24,7 @@
 		EFA8A5C0214F186700D3597D /* EmployeesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A5BF214F186700D3597D /* EmployeesController.swift */; };
 		EFA8A5C3214F19EE00D3597D /* UIViewController + Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A5C2214F19EE00D3597D /* UIViewController + Helpers.swift */; };
 		EFA8A5C5214F1B5700D3597D /* CreateEmployeeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA8A5C4214F1B5700D3597D /* CreateEmployeeController.swift */; };
+		EFBDC6FE2162A71C0053DE77 /* CompaniesAutoUpdateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBDC6FD2162A71C0053DE77 /* CompaniesAutoUpdateController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		EFA8A5BF214F186700D3597D /* EmployeesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesController.swift; sourceTree = "<group>"; };
 		EFA8A5C2214F19EE00D3597D /* UIViewController + Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Helpers.swift"; sourceTree = "<group>"; };
 		EFA8A5C4214F1B5700D3597D /* CreateEmployeeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEmployeeController.swift; sourceTree = "<group>"; };
+		EFBDC6FD2162A71C0053DE77 /* CompaniesAutoUpdateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesAutoUpdateController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				EFA8A5B8214EB75100D3597D /* CompanyCell.swift */,
 				EFA8A5BB214EC3CB00D3597D /* CreateCompanyControllerDelegate.swift */,
 				EFA8A5BD214EC57000D3597D /* CompaniesController + UITableView.swift */,
+				EFBDC6FD2162A71C0053DE77 /* CompaniesAutoUpdateController.swift */,
 			);
 			path = Companies;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				EFA8A5C5214F1B5700D3597D /* CreateEmployeeController.swift in Sources */,
 				EF6D4716214AE8BF00425BAC /* DataModel.xcdatamodeld in Sources */,
 				EFA8A5C3214F19EE00D3597D /* UIViewController + Helpers.swift in Sources */,
+				EFBDC6FE2162A71C0053DE77 /* CompaniesAutoUpdateController.swift in Sources */,
 				EFA03E082147FA37003D1D4C /* AppDelegate.swift in Sources */,
 				EF6D4718214AF8A600425BAC /* CoreDataManager.swift in Sources */,
 				EFA03E1C2149C305003D1D4C /* Company.swift in Sources */,
