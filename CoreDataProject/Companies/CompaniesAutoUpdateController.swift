@@ -74,16 +74,37 @@ class CompaniesAutoUpdateController: UITableViewController, NSFetchedResultsCont
 		
 		navigationItem.title = "Company Auto Updates"
 		
-		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(handleAdd))
+		navigationItem.leftBarButtonItems = [
+            UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(handleAdd)),
+            UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(handleDelete))
+            ]
 		
 		tableView.backgroundColor = UIColor.darkBlue
 		tableView.register(CompanyCell.self, forCellReuseIdentifier: cellId)
+        
 		
 		fetchResultsController.fetchedObjects?.forEach({ (company) in
 			print(company.name ?? "")
 		})
 	}
 	
+    @objc fileprivate func handleDelete() {
+        
+        let request: NSFetchRequest<Company> = Company.fetchRequest()
+        
+        request.predicate = NSPredicate(format: "name CONTAINS %@", "B")
+        
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        
+        let companiesWithB = try? context.fetch(request)
+        
+        companiesWithB?.forEach { (company) in
+            context.delete(company)
+        }
+        
+        try? context.save()
+    }
+    
 	@objc fileprivate func handleAdd() {
 		print("Adding company...")
 		let context = CoreDataManager.shared.persistentContainer.viewContext
@@ -95,7 +116,7 @@ class CompaniesAutoUpdateController: UITableViewController, NSFetchedResultsCont
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return fetchResultsController.sections![section].numberOfObjects
+        return fetchResultsController.sections![section].numberOfObjects
 	}
 	
 	let cellId = "cellId"
@@ -112,5 +133,24 @@ class CompaniesAutoUpdateController: UITableViewController, NSFetchedResultsCont
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 50
 	}
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return fetchResultsController.sections?.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = IndentedLabel()
+        label.text = fetchResultsController.sectionIndexTitles[section]
+        label.backgroundColor = UIColor.lightBlue
+        return label
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, sectionIndexTitleForSectionName sectionName: String) -> String? {
+        return sectionName 
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
 	
 }

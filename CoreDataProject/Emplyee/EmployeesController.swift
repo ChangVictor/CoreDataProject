@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class indentedLabel: UILabel {
+class IndentedLabel: UILabel {
 	
 	override func drawText(in rect: CGRect) {
 		let inset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
@@ -101,7 +101,7 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
 	}
 	
 	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-		let label = indentedLabel()
+		let label = IndentedLabel()
 //		if section == 0 {
 //			label.text = EmployeeType.Executive.rawValue
 //		} else if section == 1{
