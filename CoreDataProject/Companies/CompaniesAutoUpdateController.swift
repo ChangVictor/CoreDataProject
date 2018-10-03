@@ -83,9 +83,10 @@ class CompaniesAutoUpdateController: UITableViewController, NSFetchedResultsCont
 		tableView.register(CompanyCell.self, forCellReuseIdentifier: cellId)
         
 		
-		fetchResultsController.fetchedObjects?.forEach({ (company) in
-			print(company.name ?? "")
-		})
+//		fetchResultsController.fetchedObjects?.forEach({ (company) in
+//			print(company.name ?? "")
+//		})
+		Service.shared.downloadCompaniesFromServer()
 	}
 	
     @objc fileprivate func handleDelete() {
