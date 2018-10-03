@@ -21,7 +21,7 @@ class CompaniesAutoUpdateController: UITableViewController, NSFetchedResultsCont
 			NSSortDescriptor(key: "name", ascending: true)
 		]
 		
-		let fetchRC = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+		let fetchRC = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "name", cacheName: nil)
 		
 		fetchRC.delegate = self
 		
@@ -141,7 +141,8 @@ class CompaniesAutoUpdateController: UITableViewController, NSFetchedResultsCont
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = IndentedLabel()
         label.text = fetchResultsController.sectionIndexTitles[section]
-        label.backgroundColor = UIColor.lightBlue
+//		label.text = "HEADER"
+		label.backgroundColor = UIColor.lightBlue
         return label
     }
     
