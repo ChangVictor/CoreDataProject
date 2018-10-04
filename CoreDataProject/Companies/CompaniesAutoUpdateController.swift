@@ -86,17 +86,26 @@ class CompaniesAutoUpdateController: UITableViewController, NSFetchedResultsCont
 //		fetchResultsController.fetchedObjects?.forEach({ (company) in
 //			print(company.name ?? "")
 //		})
+		let refreshControl = UIRefreshControl()
+		refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+		refreshControl.tintColor = .white
+		self.refreshControl = refreshControl
+	}
+	
+	@objc fileprivate func handleRefresh() {
+		
 		Service.shared.downloadCompaniesFromServer()
+		self.refreshControl?.endRefreshing()
+		
 	}
 	
     @objc fileprivate func handleDelete() {
         
         let request: NSFetchRequest<Company> = Company.fetchRequest()
         
-        request.predicate = NSPredicate(format: "name CONTAINS %@", "B")
-        
+//        request.predicate = NSPredicate(format: "name CONTAINS %@", "B")
+		
         let context = CoreDataManager.shared.persistentContainer.viewContext
-        
         let companiesWithB = try? context.fetch(request)
         
         companiesWithB?.forEach { (company) in
@@ -126,7 +135,8 @@ class CompaniesAutoUpdateController: UITableViewController, NSFetchedResultsCont
 		let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CompanyCell
 		
 		let company = fetchResultsController.object(at: indexPath)
-		cell.textLabel?.text = company.name
+//		cell.textLabel?.text = company.name
+		cell.company = company
 		
 		return cell
 	}
@@ -154,5 +164,13 @@ class CompaniesAutoUpdateController: UITableViewController, NSFetchedResultsCont
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
+	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
+		let employeeListController = EmployeesController()
+		employeeListController.company = fetchResultsController.object(at: indexPath)
+		
+		navigationController?.pushViewController(employeeListController , animated: true)
+	}
 	
 }
