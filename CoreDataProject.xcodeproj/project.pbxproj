@@ -29,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5673E84E2166D03C00F0C482 /* DataModel_v1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel_v1.1.xcdatamodel; sourceTree = "<group>"; };
 		EF6D4715214AE8BF00425BAC /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		EF6D4717214AF8A600425BAC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		EF8A0AE521655F3A005CE7AF /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
@@ -419,9 +420,10 @@
 		EF6D4714214AE8BF00425BAC /* DataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				5673E84E2166D03C00F0C482 /* DataModel_v1.1.xcdatamodel */,
 				EF6D4715214AE8BF00425BAC /* DataModel.xcdatamodel */,
 			);
-			currentVersion = EF6D4715214AE8BF00425BAC /* DataModel.xcdatamodel */;
+			currentVersion = 5673E84E2166D03C00F0C482 /* DataModel_v1.1.xcdatamodel */;
 			path = DataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -137,7 +137,7 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
 		// ternary operator
 //		let employee = employees[indexPath.row]
 		let employee = allEmployees[indexPath.section][indexPath.row ]
-		cell.textLabel?.text = employee.name
+		cell.textLabel?.text = employee.fullName
 		
 //		if let taxId = employee.employeeInformation?.taxId {
 //			cell.textLabel?.text = "\(employee.name ?? "")   \(taxId)"
@@ -145,7 +145,7 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
 		if let birthday = employee.employeeInformation?.birthday {
 			let dateFormatter = DateFormatter()
 			dateFormatter.dateFormat = "MMM dd, yyyy"
-			cell.textLabel?.text = "\(employee.name ?? "")   \(dateFormatter.string(from: birthday))"
+			cell.textLabel?.text = "\(employee.fullName ?? "")   \(dateFormatter.string(from: birthday))"
 
 		}
 		
